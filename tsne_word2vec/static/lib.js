@@ -31,7 +31,28 @@ const DEFAULT_VIZ_OPTS = {
     "tsnePerxplexity": 2
 }
 
-function visualize(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS) {
+function lookupEmbedding(words) {
+    console.log(words);
+    const wordVecs = [{
+        "word": "king",
+        "vec": [.3, .5, .1]
+    }, {
+        "word": "queen",
+        "vec": [.35, .52, .1]
+    }, {
+        "word": "prince",
+        "vec": [.7, .125, .7]
+    }, {
+        "word": "princess",
+        "vec": [.7, .1, .7]
+    }, {
+        "word": "foo",
+        "vec": [.31, .51, .1]
+    }];
+    return wordVecs;
+}
+
+function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS) {
     const height = vizOpts.height;
     const width = vizOpts.width;
 
