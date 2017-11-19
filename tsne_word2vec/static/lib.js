@@ -31,28 +31,16 @@ const DEFAULT_VIZ_OPTS = {
     "tsnePerxplexity": 2
 }
 
-function lookupEmbedding(words) {
-    console.log(words);
-    const wordVecs = [{
-        "word": "king",
-        "vec": [.3, .5, .1]
-    }, {
-        "word": "queen",
-        "vec": [.35, .52, .1]
-    }, {
-        "word": "prince",
-        "vec": [.7, .125, .7]
-    }, {
-        "word": "princess",
-        "vec": [.7, .1, .7]
-    }, {
-        "word": "foo",
-        "vec": [.31, .51, .1]
-    }];
-    return wordVecs;
+function lookupEmbedding(words, callback) {
+    var wordVecs = [];
+    Promise.all(words.map(word => {
+      console.log('Fetching: ' + word);
+      return $.getJSON('get_embedding/' + word);
+    })).then(callback);
 }
 
 function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS) {
+    $(vizElement).empty();
     const height = vizOpts.height;
     const width = vizOpts.width;
 
@@ -132,12 +120,9 @@ function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS
             .attr('r', 35)
             .attr('stroke', function(d) {
                 return d.color;
-                return 'black'
             })
             .attr("stroke-width", 10)
-            .attr('fill', function(d) {
-                return 'white'
-            });
+            .attr("fill-opacity", 0);
         enter.append('text')
               .text(function(d) { return d.word; });
 
