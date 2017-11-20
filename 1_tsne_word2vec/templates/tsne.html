@@ -99,13 +99,15 @@
     <script>
         const vizElement = '#word2viz';
         const vizOpts = $.extend(DEFAULT_VIZ_OPTS, {height: 600, width:800});
-        const visualizeCallback = (wordVecs => visualizeEmbedding(vizElement, wordVecs, []));
         function main() {
           var wordText = $('#search-terms').val() || $('#search-terms').attr('placeholder');
           var wordList = wordText.split(' ');
-          lookupEmbedding(wordList, visualizeCallback);
+          lookupEmbedding(wordList).then(
+              wordVecs => visualizeEmbedding(vizElement, wordVecs, []));
         }
-        $('#search-button').click(main);
-        main();
+        $(function() {
+          $('#search-button').click(main);
+          main();
+        });
     </script>
 </body>

@@ -32,11 +32,26 @@ get up and running with the visualization.
 
 ## Visualization
 
+### Analogies
+
+**`/analogy**
+
+![Analogy Example](analogy_example.png)
+
+My goal here was to test how well model had learned the meanings of words (at
+least in a relative sense) by trying out various analogies. Despite how little
+I'd trained it, the model did surprisingly well on this task.
+
+![Analogy Animation](analogy_animated.gif)
+
+**`/tsne**
+
 ![t-SNE Example Visualization](tsne_example.png)
 
-My goal was to visualize the spatial relationships between embedding vectors in
-clusters of related words. I used t-SNE to visualize and perform dimensionality
-reduction on the embeddings, and d3.js to run and animate the visualization.
+My goal here was to visualize the spatial relationships between embedding
+vectors in clusters of related words. I used t-SNE to visualize and perform
+dimensionality reduction on the embeddings, and d3.js to run and animate the
+visualization.
 
 Here is an animated example:
 
@@ -46,7 +61,7 @@ Here is an animated example:
 
 To enable the visualization, I provided a couple of API endpoints:
 
-*`/nearby/<word>`*
+**`/nearby/<word>`**
 
 ```
 $ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:5000/nearby/king

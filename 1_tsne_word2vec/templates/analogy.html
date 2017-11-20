@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="{{url_for('static', filename='lib.js')}}"></script>
+
+    <link rel="stylesheet" type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+        body {
+            background: #f2f2f2;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            margin: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        #container {
+            height: 100%;
+            width: 100%;
+        }
+    /* Borrowed from https://codepen.io/huange/pen/rbqsD */
+    #search-wrap {
+      text-align:center;
+      height: 100%;
+    }
+    #search {
+      position: relative;
+      width: 75%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: auto;
+    }
+    #search-a, #search-b, #search-c, #search-d {
+      border: 3px solid #1f77b4;
+      padding: 5px;
+      font-size: 20px;
+      border-radius: 5px;
+      outline: none;
+      color: #1f77b4;
+    }
+    #search-d {
+      color: #777;
+      border: 5px solid #777;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    <div id="search-wrap">
+       <div id="search">
+        <input type="text" id="search-a" placeholder="prince"> :
+        <input type="text" id="search-b" placeholder="princess"> ::
+        <input type="text" id="search-c" placeholder="king"> :
+        <input type="text" id="search-d" placeholder="queen" disabled>
+       </button>
+       </div>
+    </div>
+  </div>
+    <script>
+        function main() {
+          var wordA = $('#search-a').val() || $('#search-a').attr('placeholder');
+          var wordB = $('#search-b').val() || $('#search-b').attr('placeholder');
+          var wordC = $('#search-c').val() || $('#search-c').attr('placeholder');
+          lookupAnalogy(wordA, wordB, wordC).done(wordD => $('#search-d').val(wordD));
+        }
+        $(function() {
+          $('#search-a,#search-b,#search-c').change(main);
+          $('#search-a,#search-b,#search-c').keydown(function (e) {
+            if (e.keyCode == 13) {
+              e.preventDefault();
+              main();
+            }
+          });
+          main();
+        });
+    </script>
+</body>
