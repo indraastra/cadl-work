@@ -39,6 +39,7 @@ clusters of related words. I used t-SNE to visualize and perform dimensionality
 reduction on the embeddings, and d3.js to run and animate the visualization.
 
 Here is an animated example:
+
 ![t-SNE Animation](tsne_animated.gif)
 
 ## API
