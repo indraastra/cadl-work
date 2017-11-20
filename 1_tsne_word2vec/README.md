@@ -34,7 +34,7 @@ get up and running with the visualization.
 
 ### Analogies
 
-**`/analogy**
+**`/analogy`**
 
 ![Analogy Example](analogy_example.png)
 
@@ -44,7 +44,7 @@ I'd trained it, the model did surprisingly well on this task.
 
 ![Analogy Animation](analogy_animated.gif)
 
-**`/tsne**
+**`/tsne`**
 
 ![t-SNE Example Visualization](tsne_example.png)
 
@@ -103,7 +103,7 @@ Date: Mon, 20 Nov 2017 04:17:06 GMT
 }
 ```
 
-*`/embedding/<word>`*
+**`/embedding/<word>`**
 
 ```
 $ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:5000/embedding/king
