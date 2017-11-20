@@ -21,6 +21,10 @@ function cosineSimilarity(vecA, vecB) {
     return vecDotProduct(vecA, vecB) / (vecMagnitude(vecA) * vecMagnitude(vecB));
 }
 // End borrowed code.
+function lookupAnalogy(wordA, wordB, wordC) {
+    console.log('Completing analogy:', wordA, wordB, wordC);
+    return $.getJSON('analogy/' + wordA + '/' + wordB + '/' + wordC).then(data => data.word_d);
+}
 
 const DEFAULT_VIZ_OPTS = {
     "height": 600,
@@ -31,12 +35,12 @@ const DEFAULT_VIZ_OPTS = {
     "tsnePerxplexity": 2
 }
 
-function lookupEmbedding(words, callback) {
+function lookupEmbedding(words) {
     var wordVecs = [];
-    Promise.all(words.map(word => {
-      console.log('Fetching: ' + word);
+    return Promise.all(words.map(word => {
+      console.log('Fetching embedding:', word);
       return $.getJSON('embedding/' + word);
-    })).then(callback);
+    }));
 }
 
 

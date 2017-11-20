@@ -25,11 +25,33 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  return render_template('tsne.html')
+
+
+@app.route('/analogy')
+def analogy():
+  return render_template('analogy.html')
+
+
+@app.route('/analogy/<word_a>/<word_b>/<word_c>')
+def get_analogy(word_a, word_b, word_c):
+  return json.jsonify({
+    'word_a': word_a,
+    'word_b': word_b,
+    'word_c': word_c,
+    'word_d': model.analogy(bytes(word_a, 'utf-8'),
+                            bytes(word_b, 'utf-8'),
+                            bytes(word_c, 'utf-8')).decode('utf-8')
+  })
+
+
+@app.route('/tsne')
+def tsne():
+  return render_template('tsne.html')
 
 
 @app.route('/embedding/<word>')
-def embedding(word):
+def get_embedding(word):
   emb = model.get_embedding(bytes(word, 'utf-8'))
   return json.jsonify({
     'word': word,
@@ -38,7 +60,7 @@ def embedding(word):
 
 
 @app.route('/nearby/<word>')
-def nearby(word):
+def get_nearby(word):
   nearby = model.get_nearby(bytes(word, 'utf-8'))
   return json.jsonify({
     'word': word,
