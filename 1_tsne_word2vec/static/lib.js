@@ -35,11 +35,18 @@ function lookupEmbedding(words, callback) {
     var wordVecs = [];
     Promise.all(words.map(word => {
       console.log('Fetching: ' + word);
-      return $.getJSON('get_embedding/' + word);
+      return $.getJSON('embedding/' + word);
     })).then(callback);
 }
 
+
+// Reference to the simulation object. Global so that this can be stopped
+// before a new simulation is begun.
+var _forcetsne = null;
 function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS) {
+    if (_forcetsne) {
+      _forcetsne.stop();
+    }
     $(vizElement).empty();
     const height = vizOpts.height;
     const width = vizOpts.width;
@@ -61,7 +68,7 @@ function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS
     const dists = words.map(d => words.map(e => 1 - cosineSimilarity(d.vec, e.vec)));
     tsne.initDataDist(dists);
 
-    const forcetsne = d3.forceSimulation(
+    _forcetsne = d3.forceSimulation(
       words.map(d => (d.x = width / 2, d.y = height / 2, d)))
         .alphaDecay(vizOpts.forceAlphaDecay)
         .alpha(vizOpts.forceAlpha)
@@ -122,7 +129,8 @@ function visualizeEmbedding(vizElement, words, links, vizOpts = DEFAULT_VIZ_OPTS
                 return d.color;
             })
             .attr("stroke-width", 10)
-            .attr("fill-opacity", 0);
+            .attr("fill", 'white')
+            .attr("fill-opacity", 0.4);
         enter.append('text')
               .text(function(d) { return d.word; });
 

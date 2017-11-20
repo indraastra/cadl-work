@@ -28,15 +28,24 @@ def index():
   return render_template('index.html')
 
 
-@app.route('/get_embedding/<word>')
-def get_embedding(word):
+@app.route('/embedding/<word>')
+def embedding(word):
   emb = model.get_embedding(bytes(word, 'utf-8'))
   return json.jsonify({
     'word': word,
-    'vec': list(np.asfarray(emb))
+    'vec': list(emb)
+  })
+
+
+@app.route('/nearby/<word>')
+def nearby(word):
+  nearby = model.get_nearby(bytes(word, 'utf-8'))
+  return json.jsonify({
+    'word': word,
+    'nearby': nearby
   })
 
 
 if __name__ == '__main__':
   """Train a word2vec model."""
-  app.run(debug=False)
+  app.run(debug=False, host='0.0.0.0')
