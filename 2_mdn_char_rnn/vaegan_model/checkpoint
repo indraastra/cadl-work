@@ -1,0 +1,6 @@
+model_checkpoint_path: "vaegan-700"
+all_model_checkpoint_paths: "vaegan-300"
+all_model_checkpoint_paths: "vaegan-400"
+all_model_checkpoint_paths: "vaegan-500"
+all_model_checkpoint_paths: "vaegan-600"
+all_model_checkpoint_paths: "vaegan-700"
