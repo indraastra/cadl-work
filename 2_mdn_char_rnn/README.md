@@ -22,8 +22,8 @@ and embeddings.
 * model input: image
 * model output: image
 * byproduct: an encoder, decoder, and visual embedding:
-** encode(image) -> embedding
-** decode(embedding) -> image
+  * encode(image) -> embedding
+  * decode(embedding) -> image
 
 Final training reconstruction:
 ![Final Training Reconstruction](examples/vaegan-training-reconstruction.png)
@@ -37,7 +37,7 @@ character of a font from the previous character.
 
 * model input: embedding
 * model output: embedding
-** predict(embedding) -> embedding
+  * predict(embedding) -> embedding
 
 [Video of training in progress](https://youtu.be/uLn3MaXLs14)
 
