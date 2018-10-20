@@ -47,12 +47,14 @@ Epoch 116832:
 ## Usage
 
 New albums to reconstruct:
+
 ![Albums](examples/experiment_montage.png)
 
-Reconstruction
+Reconstruction:
+
 ![Animated reconstruction](examples/experiment_recon.gif)
 
-See [DRAW Experiments](DRAW Experiments.ipynb) for the experiment notebook.
+See [DRAW Experiments](DRAW\ Experiments.ipynb) for the experiment notebook.
 
 ### Observations
 
